@@ -1,29 +1,29 @@
 package grafo;
 
-public class Arista<T> {
-    public T origen;
-    public T destino;
+public class Arista {
+    public int origen;
+    public int destino;
     public int peso;
 
-    public Arista(T origen, T destino, int peso) {
+    public Arista(int origen, int destino, int peso) {
         this.origen = origen;
         this.destino = destino;
         this.peso = peso;
     }
 
-	public T getOrigen() {
+	public int getOrigen() {
 		return origen;
 	}
 
-	public void setOrigen(T origen) {
+	public void setOrigen(int origen) {
 		this.origen = origen;
 	}
 
-	public T getDestino() {
+	public int getDestino() {
 		return destino;
 	}
 
-	public void setDestino(T destino) {
+	public void setDestino(int destino) {
 		this.destino = destino;
 	}
 

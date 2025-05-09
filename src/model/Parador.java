@@ -4,12 +4,19 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 public class Parador {
 	
+	private double x;
+	private double y;
+	private int index;
 	private String nombre;
-	private Coordinate coord;
 	
-	public Parador(String nombre, Coordinate coord) {
+	public Parador(double x, double y, int index, String nombre) {
+		
+		if (nombre == null || index < 0) {
+			throw new NullPointerException("El nombre no puede ser null o el indice no puede ser < 0");
+		}
 		this.nombre = nombre;
-		this.coord = coord;
+		this.x = x;
+		this.y = y;
 	}
 
 
@@ -19,25 +26,23 @@ public class Parador {
 	}
 
 
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public int getIndex() {
+		return index;
 	}
 
 
 
-	public Coordinate getCoord() {
-		return coord;
+	public double getX() {
+		return x;
 	}
 
 
 
-	public void setCoord(Coordinate coord) {
-		this.coord = coord;
+	public double getY() {
+		return y;
 	}
-	
-	
-	
-	
+
+
+
 
 }

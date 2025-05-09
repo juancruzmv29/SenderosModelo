@@ -6,6 +6,6 @@
  *
  */
 module SenderosModelo {
-	requires java.desktop;
 	requires JMapViewer;
+    requires java.desktop;
 }
