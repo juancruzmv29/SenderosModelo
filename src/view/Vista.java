@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import grafo.Arista;
 import grafo.Grafo;
 import grafo.Prim;
 import model.ImpactoAmbiental;
+import model.LineaColor;
 import model.Parador;
 
 public class Vista {
@@ -90,6 +92,18 @@ public class Vista {
 		// Mostrar ventana
 		frame.setVisible(true);
 		agregarMarcadores(mapaController.getParque().getParadores());
+		agregarMarcadores(mapaController.getParque().getParadores());
+		
+		Prim prim = new Prim();
+		List<Arista> mst = prim.arbolGeneradorMinimo(mapaController.getParque().getGrafo());
+		dibujarSenderos(mst, mapaController.getParque().getParadores());
+
+
+		System.out.println("Aristas del AGM:");
+		for (Arista a : mst) {
+		    System.out.println(a.getOrigen() + " - " + a.getDestino() + " peso: " + a.getPeso());
+		}
+
 		
 	}
 	
@@ -108,5 +122,24 @@ public class Vista {
 	            cont++;
 	        }
 	    }
+	 
+	 private void dibujarSenderos(List<Arista> aristas, HashMap<Integer, Parador> paradores) {
+		    for (Arista a : aristas) {
+		        Parador origen = paradores.get(a.getOrigen());
+		        Parador destino = paradores.get(a.getDestino());
+
+		        if (origen != null && destino != null) {
+		            List<Coordinate> coords = new ArrayList<>();
+		            coords.add(new Coordinate(origen.getX(), origen.getY()));
+		            coords.add(new Coordinate(destino.getX(), destino.getY()));
+
+		            LineaColor linea = new LineaColor(coords, a.getPeso());
+		            mapa.addMapPolygon(linea);
+		        }
+		    }
+		}
+
+
+
 	
 }

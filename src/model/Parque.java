@@ -83,7 +83,7 @@ public class Parque {
 		grafo.agregarArista(2, 3, 4);
 	}
 	
-	private Grafo getGrafo() {
+	public Grafo getGrafo() {
 		return this.grafo;
 	}
 	

@@ -8,24 +8,26 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 public class Prim {
+
     public List<Arista> arbolGeneradorMinimo(Grafo grafo) {
-        Set<Arista> visitados = new HashSet<>();
-        PriorityQueue<Arista> cola = new PriorityQueue<>(Comparator.comparingInt(a -> a.peso));
         List<Arista> resultado = new ArrayList<>();
+        Set<Integer> visitados = new HashSet<>();
+        PriorityQueue<Arista> cola = new PriorityQueue<>(Comparator.comparingInt(Arista::getPeso));
 
-        Arista start = grafo.getVecinos().keySet().iterator().next();
-        visitados.add(start);
-        cola.addAll(grafo.getVecinos().get(start));
+        visitados.add(0); // comenzamos desde el nodo 0
+        cola.addAll(grafo.getAristasDesde(0));
 
-        while (!cola.isEmpty() && visitados.size() < grafo.getVecinos().size()) {
-            Arista arista = cola.poll();
-            if (visitados.contains(arista.destino)) continue;
+        while (!cola.isEmpty() && visitados.size() < grafo.tamano()) {
+            Arista actual = cola.poll();
+            int destino = actual.getDestino();
 
-            resultado.add(arista);
-            visitados.add(arista.destino);
+            if (visitados.contains(destino)) continue;
 
-            for (Arista a : grafo.getVecinos().get(arista.destino)) {
-                if (!visitados.contains(a.destino)) {
+            visitados.add(destino);
+            resultado.add(actual);
+
+            for (Arista a : grafo.getAristasDesde(destino)) {
+                if (!visitados.contains(a.getDestino())) {
                     cola.add(a);
                 }
             }
@@ -34,3 +36,4 @@ public class Prim {
         return resultado;
     }
 }
+

@@ -48,6 +48,11 @@ public class Grafo {
 		return false;
 	}
     
+    public Set<Arista> getAristasDesde(int nodo) {
+        verificarArista(nodo);
+        return vecinos.get(nodo);
+    }
+    
     private void verificarArista(int i)
 	{
 		if( i < 0 )
