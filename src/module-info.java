@@ -8,4 +8,5 @@
 module SenderosModelo {
 	requires JMapViewer;
     requires java.desktop;
+	requires junit;
 }

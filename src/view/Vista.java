@@ -1,15 +1,21 @@
 package view;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
@@ -22,8 +28,9 @@ import controller.MapaController;
 import grafo.Arista;
 import grafo.Grafo;
 import grafo.Prim;
-import model.ImpactoAmbiental;
 import model.LineaColor;
+import model.MapMarkerLinea;
+import model.MapMarkerParador;
 import model.Parador;
 
 public class Vista {
@@ -63,17 +70,21 @@ public class Vista {
 	 */
 	private void initialize() {
 		
+		
+		
+		
 		mapaController.cargarParque();
 
 		// Configuración del frame
 		frame = new JFrame("SenderosModelo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 600);
+		frame.setVisible(true);
 		frame.setLayout(new BorderLayout()); // Usamos BorderLayout general
 
 		// Creamos el mapa
 		mapa = new JMapViewer();
-		mapa.setDisplayPosition(new Coordinate(-25.6836, -54.4448), 15);
+		mapa.setDisplayPosition(new Coordinate(-25.6836, -54.4448), 18);
 		mapa.setZoomControlsVisible(true);
 		mapa.setFocusable(true);
 		mapa.requestFocusInWindow();
@@ -94,6 +105,7 @@ public class Vista {
 		frame.setVisible(true);
 		agregarMarcadores(mapaController.getParque().getParadores());
 		
+		
 		Prim prim = new Prim();
 		List<Arista> mst = prim.arbolGeneradorMinimo(mapaController.getParque().getGrafo());
 		dibujarSenderos(mst, mapaController.getParque().getParadores());
@@ -105,17 +117,33 @@ public class Vista {
 		}
 		
 		mapa.repaint();
+		
 
 		
 	}
 	
+	 
+	 
 	 private void agregarMarcadores(HashMap<Integer, Parador> paradores) {
-		 for (Parador p : paradores.values()) {
-		        MapMarker marcador = new MapMarkerDot(p.getY(), p.getX());
-		        marcador.getStyle().setBackColor(Color.RED); // Color fijo para todos (o usa lógica mejorada)
+		    int cont = 0;
+		    for (Parador p : paradores.values()) {
+		        // Crear marcador personalizado con nombre
+		        MapMarkerParador marcador = new MapMarkerParador(p.getY(), p.getX(), p.getNombre());
+		        
+		        // Asignar colores según tu lógica original
+		        if (cont < 3) {
+		            marcador.getStyle().setBackColor(Color.GREEN);
+		        } else if (cont < 5) {
+		            marcador.getStyle().setBackColor(Color.YELLOW);
+		            marcador.getStyle().setColor(Color.BLACK); // Mejor contraste
+		        } else {
+		            marcador.getStyle().setBackColor(Color.RED);
+		        }
+		        
 		        mapa.addMapMarker(marcador);
+		        cont++;
 		    }
-	    }
+		}
 	 
 	 private void dibujarSenderos(List<Arista> aristas, HashMap<Integer, Parador> paradores) {
 		    for (Arista a : aristas) {
@@ -123,14 +151,16 @@ public class Vista {
 		        Parador destino = paradores.get(a.getDestino());
 
 		        if (origen != null && destino != null) {
-		            List<Coordinate> coords = new ArrayList<>();
-		            // Nota: JMapViewer espera (latitud, longitud) que corresponde a (y, x)
-		            coords.add(new Coordinate(origen.getY(), origen.getX()));
-		            coords.add(new Coordinate(destino.getY(), destino.getX()));
-
-		            LineaColor linea = new LineaColor(mapa, coords, a.getPeso());
-		            mapa.addMapPolygon(linea);
+		            MapMarkerLinea sendero = new MapMarkerLinea(
+		                mapa,  // Pasar la referencia al mapa
+		                origen.getY(), origen.getX(),
+		                destino.getY(), destino.getX(),
+		                a.getPeso()
+		            );
+		            mapa.addMapMarker(sendero);
 		        }
 		    }
+		    mapa.repaint();
 		}
+
 }

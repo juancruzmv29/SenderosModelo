@@ -5,11 +5,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.util.List;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+
 
 public class LineaColor extends MapPolygonImpl {
     private Color color;
@@ -26,7 +28,7 @@ public class LineaColor extends MapPolygonImpl {
         
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(color);
-        g2d.setStroke(new BasicStroke(3));
+        g2d.setStroke(new BasicStroke(5));
         
         Point p1 = puntos.get(0);
         for (int i = 1; i < puntos.size(); i++) {
@@ -44,5 +46,4 @@ public class LineaColor extends MapPolygonImpl {
         else return Color.RED;
     }
 }
-
 

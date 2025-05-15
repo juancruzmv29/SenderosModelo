@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-19">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="JMapViewer.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/junit-4.13.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.osgi_3.18.300.v20230220-1352.jar" sourcepath="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.osgi_3.18.300.v20230220-1352.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.core.commands_3.10.400.v20230220-0932.jar" sourcepath="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.core.commands_3.10.400.v20230220-0932.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.equinox.common_3.17.100.v20230202-1341.jar" sourcepath="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.equinox.common_3.17.100.v20230202-1341.jar"/>
@@ -18,10 +28,6 @@
 	<classpathentry kind="lib" path="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.ui.workbench_3.128.0.v20230220-1021.jar" sourcepath="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.ui.workbench_3.128.0.v20230220-1021.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JuanCruz29/.p2/pool/plugins/com.ibm.icu_72.1.0.jar" sourcepath="C:/Users/JuanCruz29/.p2/pool/plugins/com.ibm.icu_72.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.ui.forms_3.11.600.v20230220-0932.jar" sourcepath="C:/Users/JuanCruz29/.p2/pool/plugins/org.eclipse.ui.forms_3.11.600.v20230220-0932.jar"/>
-	<classpathentry kind="lib" path="JMapViewer.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

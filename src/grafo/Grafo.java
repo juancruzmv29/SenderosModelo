@@ -36,7 +36,7 @@ public class Grafo {
 		
 	}
     
-    public boolean edgeExists(int desde, int hacia) {
+    public boolean aristaExiste(int desde, int hacia) {
 		verificarArista(desde);
 		verificarArista(hacia);
 
