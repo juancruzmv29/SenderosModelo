@@ -9,16 +9,15 @@ public class Parador {
 	private int index;
 	private String nombre;
 	
-	public Parador(double x, double y, int index, String nombre) {
-		
-		if (nombre == null || index < 0) {
-			throw new NullPointerException("El nombre no puede ser null o el indice no puede ser < 0");
-		}
-		this.nombre = nombre;
-		this.x = x;
-		this.y = y;
+	public Parador(double y, double x, int index, String nombre) {
+	    if (nombre == null || index < 0) {
+	        throw new IllegalArgumentException("El nombre no puede ser null o el indice no puede ser < 0");
+	    }
+	    this.nombre = nombre;
+	    this.x = x; // Longitud
+	    this.y = y; // Latitud
+	    this.index = index; // Faltaba esta línea
 	}
-
 
 
 	public String getNombre() {
@@ -32,14 +31,14 @@ public class Parador {
 
 
 
-	public double getX() {
-		return x;
+	public double getY() {
+		return y;
 	}
 
 
 
-	public double getY() {
-		return y;
+	public double getX() {
+		return x;
 	}
 
 

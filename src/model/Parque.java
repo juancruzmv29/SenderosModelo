@@ -75,14 +75,16 @@ public class Parque {
 	}
 
 	private void cargarGrafo() { 
-		grafo = new Grafo(7);
-		grafo.agregarArista(0, 1, 10);
-		grafo.agregarArista(0, 2, 6);
-		grafo.agregarArista(0, 3, 5);
-		grafo.agregarArista(1, 3, 15);
-		grafo.agregarArista(2, 3, 4);
+	    grafo = new Grafo(7);
+	    grafo.agregarArista(0, 1, 10);
+	    grafo.agregarArista(0, 2, 6);
+	    grafo.agregarArista(0, 3, 5);
+	    grafo.agregarArista(1, 3, 15);
+	    grafo.agregarArista(2, 3, 4);
+	    grafo.agregarArista(3, 4, 8);  // Agregar más conexiones según sea necesario
+	    grafo.agregarArista(4, 5, 7);
+	    grafo.agregarArista(5, 6, 9);
 	}
-	
 	public Grafo getGrafo() {
 		return this.grafo;
 	}

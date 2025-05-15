@@ -17,6 +17,7 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
+
 import controller.MapaController;
 import grafo.Arista;
 import grafo.Grafo;
@@ -92,7 +93,6 @@ public class Vista {
 		// Mostrar ventana
 		frame.setVisible(true);
 		agregarMarcadores(mapaController.getParque().getParadores());
-		agregarMarcadores(mapaController.getParque().getParadores());
 		
 		Prim prim = new Prim();
 		List<Arista> mst = prim.arbolGeneradorMinimo(mapaController.getParque().getGrafo());
@@ -103,24 +103,18 @@ public class Vista {
 		for (Arista a : mst) {
 		    System.out.println(a.getOrigen() + " - " + a.getDestino() + " peso: " + a.getPeso());
 		}
+		
+		mapa.repaint();
 
 		
 	}
 	
 	 private void agregarMarcadores(HashMap<Integer, Parador> paradores) {
-		 int cont = 0;
-	        for (Parador p : paradores.values()) {
-	            MapMarker marcador = new MapMarkerDot(p.getX(), p.getY());
-	            if (cont < 3) {
-	                marcador.getStyle().setBackColor(Color.GREEN);
-	            } else if (cont < 5) {
-	                marcador.getStyle().setBackColor(Color.YELLOW);
-	            } else {
-	                marcador.getStyle().setBackColor(Color.RED);
-	            }
-	            mapa.addMapMarker(marcador);
-	            cont++;
-	        }
+		 for (Parador p : paradores.values()) {
+		        MapMarker marcador = new MapMarkerDot(p.getY(), p.getX());
+		        marcador.getStyle().setBackColor(Color.RED); // Color fijo para todos (o usa lógica mejorada)
+		        mapa.addMapMarker(marcador);
+		    }
 	    }
 	 
 	 private void dibujarSenderos(List<Arista> aristas, HashMap<Integer, Parador> paradores) {
@@ -130,16 +124,13 @@ public class Vista {
 
 		        if (origen != null && destino != null) {
 		            List<Coordinate> coords = new ArrayList<>();
-		            coords.add(new Coordinate(origen.getX(), origen.getY()));
-		            coords.add(new Coordinate(destino.getX(), destino.getY()));
+		            // Nota: JMapViewer espera (latitud, longitud) que corresponde a (y, x)
+		            coords.add(new Coordinate(origen.getY(), origen.getX()));
+		            coords.add(new Coordinate(destino.getY(), destino.getX()));
 
-		            LineaColor linea = new LineaColor(coords, a.getPeso());
+		            LineaColor linea = new LineaColor(mapa, coords, a.getPeso());
 		            mapa.addMapPolygon(linea);
 		        }
 		    }
 		}
-
-
-
-	
 }
