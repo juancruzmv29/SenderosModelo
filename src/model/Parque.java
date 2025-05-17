@@ -82,7 +82,7 @@ public class Parque {
 	    grafo.agregarArista(0, 3, 5);
 	    grafo.agregarArista(1, 3, 15);
 	    grafo.agregarArista(2, 3, 4);
-	    grafo.agregarArista(3, 4, 8);  // Agregar más conexiones según sea necesario
+	    grafo.agregarArista(3, 4, 8);  
 	    grafo.agregarArista(4, 5, 7);
 	    grafo.agregarArista(5, 6, 9);
 	    

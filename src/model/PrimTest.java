@@ -20,7 +20,6 @@ public class PrimTest {
 
     @Test
     public void testAGMGrafoConectado() {
-        // Configurar grafo de prueba
         Grafo grafo = new Grafo(5);
         grafo.agregarArista(0, 1, 2);
         grafo.agregarArista(0, 3, 6);
@@ -35,7 +34,6 @@ public class PrimTest {
         List<Arista> agm = prim.calcularAGM(grafo);
         int impactoTotal = prim.calcularImpactoTotal(agm);
 
-        // Verificaciones
         assertEquals("El AGM debe tener V-1 aristas", 4, agm.size());
         assertEquals("Impacto total incorrecto", 16, impactoTotal);
         assertTrue("Debe contener la arista 0-1", contieneArista(agm, 0, 1, 2));
