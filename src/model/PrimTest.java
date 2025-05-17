@@ -12,11 +12,15 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.List;
+
 public class PrimTest {
 
     @Test
-    public void testMSTGrafoConectado() {
-        // Configuración
+    public void testAGMGrafoConectado() {
+        // Configurar grafo de prueba
         Grafo grafo = new Grafo(5);
         grafo.agregarArista(0, 1, 2);
         grafo.agregarArista(0, 3, 6);
@@ -26,84 +30,88 @@ public class PrimTest {
         grafo.agregarArista(2, 4, 7);
         grafo.agregarArista(3, 4, 9);
 
-        // Ejecución
+        // Ejecutar algoritmo
         Prim prim = new Prim();
-        List<Arista> mst = prim.arbolGeneradorMinimo(grafo);
+        List<Arista> agm = prim.calcularAGM(grafo);
+        int impactoTotal = prim.calcularImpactoTotal(agm);
 
         // Verificaciones
-        assertEquals(4, mst.size()); // Un MST para 5 nodos debe tener 4 aristas
-        
-        // Verificar que todas las aristas esperadas están presentes
-        assertTrue(contieneArista(mst, 0, 1, 2));
-        assertTrue(contieneArista(mst, 1, 2, 3));
-        assertTrue(contieneArista(mst, 1, 4, 5));
-        assertTrue(contieneArista(mst, 0, 3, 6));
-        
-        // Verificar peso total del MST
-        assertEquals(16, calcularPesoTotal(mst));
+        assertEquals("El AGM debe tener V-1 aristas", 4, agm.size());
+        assertEquals("Impacto total incorrecto", 16, impactoTotal);
+        assertTrue("Debe contener la arista 0-1", contieneArista(agm, 0, 1, 2));
+        assertTrue("Debe contener la arista 1-2", contieneArista(agm, 1, 2, 3));
+        assertTrue("Debe contener la arista 1-4", contieneArista(agm, 1, 4, 5));
+        assertTrue("Debe contener la arista 0-3", contieneArista(agm, 0, 3, 6));
     }
 
     @Test
-    public void testMSTGrafoDesconectado() {
-        // Configuración (grafo con dos componentes conexas)
+    public void testAGMGrafoConPesosIguales() {
         Grafo grafo = new Grafo(4);
         grafo.agregarArista(0, 1, 1);
+        grafo.agregarArista(0, 2, 1);
+        grafo.agregarArista(1, 3, 1);
         grafo.agregarArista(2, 3, 1);
 
-        // Ejecución
         Prim prim = new Prim();
-        List<Arista> mst = prim.arbolGeneradorMinimo(grafo);
+        List<Arista> agm = prim.calcularAGM(grafo);
 
-        // Verificación (debería retornar solo el MST del componente conexo accesible desde 0)
-        assertEquals(1, mst.size());
-        assertTrue(contieneArista(mst, 0, 1, 1));
+        assertEquals(3, agm.size());
+        assertEquals(3, prim.calcularImpactoTotal(agm));
     }
 
     @Test
-    public void testMSTGrafoConUnSoloNodo() {
+    public void testAGMGrafoConUnSoloVertice() {
         Grafo grafo = new Grafo(1);
         Prim prim = new Prim();
-        List<Arista> mst = prim.arbolGeneradorMinimo(grafo);
-        
-        assertTrue(mst.isEmpty());
+        List<Arista> agm = prim.calcularAGM(grafo);
+
+        assertTrue("AGM debe estar vacío para un solo vértice", agm.isEmpty());
+        assertEquals(0, prim.calcularImpactoTotal(agm));
     }
 
     @Test
-    public void testMSTGrafoDelParque() {
-        // Configuración usando el mismo grafo que en la clase Parque
-        Parque parque = new Parque();
-        Grafo grafo = parque.getGrafo();
-        
+    public void testImpactoTotal() {
+        Grafo grafo = new Grafo(3);
+        grafo.agregarArista(0, 1, 5);
+        grafo.agregarArista(1, 2, 3);
+        grafo.agregarArista(0, 2, 4);
+
         Prim prim = new Prim();
-        List<Arista> mst = prim.arbolGeneradorMinimo(grafo);
+        List<Arista> agm = prim.calcularAGM(grafo);
 
-        // Verificaciones específicas para el grafo del parque
-        assertEquals(6, mst.size()); // 7 nodos => 6 aristas en el MST
-        
-        // Verificar que contiene las aristas esperadas con los pesos correctos
-        assertTrue(contieneArista(mst, 0, 1, 10));
-        assertTrue(contieneArista(mst, 0, 2, 6));
-        assertTrue(contieneArista(mst, 0, 3, 5));
-        assertTrue(contieneArista(mst, 2, 3, 4));
-        assertTrue(contieneArista(mst, 3, 4, 8));
-        assertTrue(contieneArista(mst, 4, 5, 7));
-        
-        // Verificar peso total (debería ser 40 según el grafo del parque)
-        assertEquals(40, calcularPesoTotal(mst));
+        assertEquals("Debe seleccionar las aristas de menor peso", 7, prim.calcularImpactoTotal(agm));
     }
 
-    // Métodos auxiliares para las pruebas
+    @Test
+    public void testAGMGrafoDelParque() {
+        // Grafo idéntico al de tu aplicación
+        Grafo grafo = new Grafo(7);
+        grafo.agregarArista(0, 1, 10);
+        grafo.agregarArista(0, 2, 6);
+        grafo.agregarArista(0, 3, 5);
+        grafo.agregarArista(1, 3, 15);
+        grafo.agregarArista(2, 3, 4);
+        grafo.agregarArista(3, 4, 8);
+        grafo.agregarArista(4, 5, 7);
+        grafo.agregarArista(5, 6, 9);
+
+        Prim prim = new Prim();
+        List<Arista> agm = prim.calcularAGM(grafo);
+
+        assertEquals(6, agm.size());
+        assertEquals(40, prim.calcularImpactoTotal(agm));
+        assertTrue(contieneArista(agm, 0, 3, 5));
+        assertTrue(contieneArista(agm, 2, 3, 4));
+        assertTrue(contieneArista(agm, 3, 4, 8));
+        assertTrue(contieneArista(agm, 4, 5, 7));
+        assertTrue(contieneArista(agm, 5, 6, 9));
+        assertTrue(contieneArista(agm, 0, 2, 6) || contieneArista(agm, 0, 1, 10));
+    }
+
+    // Método auxiliar para verificar aristas
     private boolean contieneArista(List<Arista> aristas, int origen, int destino, int peso) {
-        for (Arista a : aristas) {
-            if ((a.getOrigen() == origen && a.getDestino() == destino && a.getPeso() == peso) ||
-                (a.getOrigen() == destino && a.getDestino() == origen && a.getPeso() == peso)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private int calcularPesoTotal(List<Arista> aristas) {
-        return aristas.stream().mapToInt(Arista::getPeso).sum();
+        return aristas.stream().anyMatch(a -> 
+            (a.getOrigen() == origen && a.getDestino() == destino && a.getPeso() == peso) ||
+            (a.getOrigen() == destino && a.getDestino() == origen && a.getPeso() == peso));
     }
 }

@@ -105,17 +105,19 @@ public class Vista {
 		frame.setVisible(true);
 		agregarMarcadores(mapaController.getParque().getParadores());
 		
-		
+		Grafo grafo = mapaController.getParque().getGrafo();
 		Prim prim = new Prim();
-		List<Arista> mst = prim.arbolGeneradorMinimo(mapaController.getParque().getGrafo());
-		dibujarSenderos(mst, mapaController.getParque().getParadores());
+		List<Arista> agm = prim.calcularAGM(grafo);
 
+		// 4. Calcular el impacto ambiental total
+		int impactoTotal = prim.calcularImpactoTotal(agm);
 
-		System.out.println("Aristas del AGM:");
-		for (Arista a : mst) {
-		    System.out.println(a.getOrigen() + " - " + a.getDestino() + " peso: " + a.getPeso());
+		// 5. Mostrar resultados
+		System.out.println("=== Senderos a construir ===");
+		for (Arista arista : agm) {
+		    System.out.println(arista);
 		}
-		
+		System.out.println("Impacto ambiental total: " + impactoTotal);
 		mapa.repaint();
 		
 
