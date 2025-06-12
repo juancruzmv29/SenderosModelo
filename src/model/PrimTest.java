@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import grafo.Arista;
 import grafo.Grafo;
-import grafo.Prim;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

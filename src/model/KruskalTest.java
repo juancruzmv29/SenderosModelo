@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import grafo.Arista;
 import grafo.Grafo;
-import grafo.Kruskal;
 
 import static org.junit.Assert.*;
 import java.util.List;

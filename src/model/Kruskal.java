@@ -1,7 +1,9 @@
-package grafo;
+package model;
 
 import java.util.*;
 
+import grafo.Arista;
+import grafo.Grafo;
 import model.UnionFind;
 
 public class Kruskal {

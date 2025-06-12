@@ -31,6 +31,23 @@ public class Grafo {
         adyacencias.get(destino).add(new Arista(destino, origen, peso)); // Grafo no dirigido
     }
 
+    public List<Arista> getAristas() {
+        Set<String> visitadas = new HashSet<>();
+        List<Arista> todas = new ArrayList<>();
+
+        for (int i = 0; i < numVertices; i++) {
+            for (Arista a : adyacencias.get(i)) {
+                String clave = Math.min(a.getOrigen(), a.getDestino()) + "-" + Math.max(a.getOrigen(), a.getDestino());
+                if (!visitadas.contains(clave)) {
+                    visitadas.add(clave);
+                    todas.add(a);
+                }
+            }
+        }
+
+        return todas;
+    }
+    
     public List<Arista> obtenerAristas(int vertice) {
         verificarVertice(vertice);
         return Collections.unmodifiableList(adyacencias.get(vertice));
@@ -45,6 +62,22 @@ public class Grafo {
             throw new IllegalArgumentException("Vértice inválido: " + vertice);
         }
     }
+
+	public List<List<Arista>> getAdyacencias() {
+		return adyacencias;
+	}
+
+	public void setAdyacencias(List<List<Arista>> adyacencias) {
+		this.adyacencias = adyacencias;
+	}
+
+	public void setNumVertices(int numVertices) {
+		this.numVertices = numVertices;
+	}
+    
+    
 }
+
+
 
 

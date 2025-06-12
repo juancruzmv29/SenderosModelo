@@ -11,13 +11,11 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 import grafo.Arista;
 import grafo.Grafo;
-import grafo.Prim;
 
 public class Parque {
 	
-	HashMap<Integer, Parador> paradores;
-	Grafo grafo;
-	Parque p;
+	private HashMap<Integer, Parador> paradores;
+	private Grafo grafo;
 	
 	
 	
@@ -89,6 +87,11 @@ public class Parque {
 	}
 	public Grafo getGrafo() {
 		return this.grafo;
+	}
+
+	public void removeAllMapMarkers() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
