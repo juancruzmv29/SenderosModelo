@@ -4,8 +4,8 @@ import java.awt.EventQueue;
 import java.util.List;
 
 import controller.VistaController;
-import grafo.Arista;
-import grafo.Grafo;
+import model.Arista;
+import model.Grafo;
 import view.Vista;
 
 public class Main {

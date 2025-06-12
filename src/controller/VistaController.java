@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
-import grafo.Arista;
-import grafo.Grafo;
+import model.Arista;
+import model.Grafo;
 import model.Kruskal;
 import model.LineaColor;
 import model.MapMarkerLinea;

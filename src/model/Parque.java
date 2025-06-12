@@ -9,9 +9,6 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
-import grafo.Arista;
-import grafo.Grafo;
-
 public class Parque {
 	
 	private HashMap<Integer, Parador> paradores;

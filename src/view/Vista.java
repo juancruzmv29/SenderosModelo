@@ -34,9 +34,8 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
-
-import grafo.Arista;
-import grafo.Grafo;
+import model.Arista;
+import model.Grafo;
 import model.Kruskal;
 import model.LineaColor;
 import model.MapMarkerLinea;
@@ -58,13 +57,13 @@ public class Vista extends JFrame {
     public Vista() {
         setTitle("TP Senderos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(750, 500);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         // Mapa
         mapa = new JMapViewer();
-        mapa.setDisplayPosition(new Coordinate(-25.6836, -54.4448), 18);
+        mapa.setDisplayPosition(new Coordinate(-25.6830, -54.4450), 17);
         mapa.setZoomControlsVisible(false);
         mapa.setFocusable(true);
         mapa.requestFocusInWindow();

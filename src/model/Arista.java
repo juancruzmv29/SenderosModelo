@@ -1,4 +1,4 @@
-package grafo;
+package model;
 
 public class Arista implements Comparable<Arista> {
     private int origen;
