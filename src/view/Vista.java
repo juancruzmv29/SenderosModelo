@@ -100,7 +100,6 @@ public class Vista extends JFrame {
     }
 
 
-    // Getters para botones si los necesitás en el controlador...
 
 
 

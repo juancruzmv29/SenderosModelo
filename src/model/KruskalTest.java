@@ -23,13 +23,11 @@ public class KruskalTest {
         List<Arista> agm = kruskal.calcularAGM(grafo);
         int impactoTotal = kruskal.calcularImpactoTotal(agm);
 
-        // Kruskal debería obtener el mismo resultado que Prim para este grafo
         assertEquals(4, agm.size());
         assertEquals(16, impactoTotal);
         assertTrue(contieneArista(agm, 0, 1, 2));
     }
 
-    // Método auxiliar igual que en PrimTest
     private boolean contieneArista(List<Arista> aristas, int origen, int destino, int peso) {
         return aristas.stream().anyMatch(a -> 
             (a.getOrigen() == origen && a.getDestino() == destino && a.getPeso() == peso) ||

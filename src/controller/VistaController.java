@@ -37,8 +37,8 @@ public class VistaController {
 	private JPanel panelControles;
 	
 	public VistaController(Vista vista) {
-		this.mapa = vista.getMapa(); // Debe haber un getMapa() en Vista
-		this.panelControles = vista.getPanelControles(); // Lo mismo
+		this.mapa = vista.getMapa(); 
+		this.panelControles = vista.getPanelControles();
 		this.parque = new Parque();
 		this.vista = vista;
 		inicializar();
@@ -53,7 +53,7 @@ public class VistaController {
 	}
 	
 	public void cargarParque() {
-		mapa.removeAllMapMarkers(); // Limpia mapa si ya hay
+		mapa.removeAllMapMarkers(); 
 	    agregarMarcadores(parque.getParadores());
 	}
 	

@@ -33,7 +33,7 @@ public class MapMarkerLinea extends MapMarkerCircle {
             this.colorLinea = Color.GRAY; // por si hay algún valor fuera de rango
         }
 
-        setBackColor(new Color(0, 0, 255, 0)); // punto invisible
+        setBackColor(new Color(0, 0, 255, 0)); 
     }
 
     @Override

@@ -86,9 +86,4 @@ public class Parque {
 		return this.grafo;
 	}
 
-	public void removeAllMapMarkers() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
